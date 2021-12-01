@@ -1,5 +1,5 @@
 # Description
- Repositorio contendo conteudo do ["the excellent Getting Started guide"](https://reactjs.org/tutorial/tutorial.html)
+ Repositorio contendo o conteudo do [tutorial de introdução ao React](https://reactjs.org/tutorial/tutorial.html).
 
 # Getting Started with Create React App
 
