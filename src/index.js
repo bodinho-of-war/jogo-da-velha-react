@@ -50,11 +50,29 @@ function Square (props) {
         super(props)
         this.state = {
             history: [{
-                squares: Array(9).fill(null)
+                squares: Array(9).fill(null),
+                col: 0,
+                row: 0,
             }],
             stepNumber: 0,
             xIsNext: true
         }
+    }
+
+    checkColumnRow(i) {
+      let cl, rw
+      
+      if(i < 3) {
+        rw = 1
+        cl = i + 1
+      } else if (i > 5) {
+        rw = 3
+        cl = i - 5
+      } else {
+        rw = 2
+        cl = i - 2
+      }
+      return {cl: cl, rw: rw}
     }
 
     handleClick(i) {
@@ -65,9 +83,15 @@ function Square (props) {
             return
         }
         squares[i] = this.state.xIsNext? 'X' : 'O'
+        const {cl, rw} = this.checkColumnRow(i)
+        
         this.setState({
             history: history.concat([
-                {squares}
+                {
+                  squares,
+                  col: cl,
+                  row: rw
+                }
             ]),
             stepNumber: history.length,
             xIsNext: !this.state.xIsNext
@@ -88,8 +112,9 @@ function Square (props) {
 
         const moves = history.map(
             (step, move) => {
+                console.log(step);
                 const desc = move?
-                `Go to move #${move}`:
+                `Go to move #${move} Column:${step.col} x Row:${step.row}`:
                 'Go to game start'
                 return (
                     <li key={move}>
