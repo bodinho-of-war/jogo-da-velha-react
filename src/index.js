@@ -101,7 +101,8 @@ function Square (props) {
     jumpTo(step) {
         this.setState({
             stepNumber: step,
-            xIsNext: (step % 2) === 0
+            xIsNext: (step % 2) === 0,
+            selected: step
         })
     }
 
@@ -112,13 +113,13 @@ function Square (props) {
 
         const moves = history.map(
             (step, move) => {
-                console.log(step);
                 const desc = move?
                 `Go to move #${move} Column:${step.col} x Row:${step.row}`:
                 'Go to game start'
                 return (
                     <li key={move}>
-                        <button onClick={() => this.jumpTo(move)}>{desc}</button>
+                        <button style={{'fontWeight': this.state.selected === move ? 'bold' : 'normal'}}
+                        onClick={() => {this.jumpTo(move)}}>{desc}</button>
                     </li>
                 )
             }
