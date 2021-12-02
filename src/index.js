@@ -101,6 +101,12 @@ function Square (props) {
         })
     }
 
+    setReverse() {
+      this.setState({
+        reverse: !this.state.reverse
+      })
+    }
+
     render() {
         const history = this.state.history
         const current = history[this.state.stepNumber]
@@ -119,7 +125,8 @@ function Square (props) {
                 )
             }
         )
-
+        
+        const sort = <button onClick={() => this.setReverse()}>{this.state.reverse? 'Crescente' : 'Decrescente'}</button>
 
         let status
         if(winner) {
@@ -127,7 +134,7 @@ function Square (props) {
         } else {
             status =`Next player: ${this.state.xIsNext? 'X' : 'O'}`;
         }
-
+        const list = this.state.reverse? <ol reversed> {moves.reverse()} </ol> : <ol>{moves}</ol>
       return (
         <div className="game">
           <div className="game-board">
@@ -138,7 +145,9 @@ function Square (props) {
           </div>
           <div className="game-info">
             <div>{status}</div>
-            <ol>{moves}</ol>
+            <br/>
+            <div>{sort}</div>
+            {list}
           </div>
         </div>
       );
