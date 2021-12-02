@@ -23,23 +23,18 @@ function Square (props) {
     }
   
     render() {
+      const squares = this.props.squares.map((square, index) => {
+        return this.renderSquare(index)
+      })
+      const rows = []
+      for (let index = 0; index < 3; index++) {
+        rows.push(<div className="board-row">
+          {squares.splice(0, 3)}
+        </div>)
+      }
       return (
         <div>
-          <div className="board-row">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
-          </div>
+          {rows}
         </div>
       );
     }
